@@ -2,7 +2,9 @@ import spock.lang.Specification
 
 class PokerSpec extends Specification {
     def "nothing"() {
+        given:
+            def poker = new Poker()
         expect:
-            true == true
+            poker.game("Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH") == "White wins. - with high card: Ace"
     }
 }
