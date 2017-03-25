@@ -1,8 +1,10 @@
 class Poker {
     InputParser inputParser
+    HandComparator handComparator
 
     def game(String input) {
-        inputParser.parse(input)
+        def (Hand handOne, Hand handTwo) = inputParser.parse(input)
+        handComparator.compare(handOne, handTwo)
         return "White wins. - with high card: Ace"
     }
 }
