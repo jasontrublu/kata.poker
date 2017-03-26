@@ -1,13 +1,20 @@
 package model
 
 enum Winner {
-    WHITE(name: "White"),
-    BLACK(name: "Black"),
-    TIE(name: "Tie")
+    WHITE(
+        name: "White",
+        template: "%s wins. - with %s"),
+    BLACK(
+        name: "Black",
+        template: "%s wins. - with %s"),
+    TIE(
+        name: "Tie",
+        template: "%s")
 
     final String name
+    final String template
 
-    boolean isTie() {
-        this == TIE
+    def getOutput(reason) {
+        return sprintf(template, name, reason)
     }
 }
