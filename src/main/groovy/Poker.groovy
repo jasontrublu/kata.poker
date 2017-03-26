@@ -4,8 +4,7 @@ class Poker {
     OutputFormatter outputFormatter
 
     def game(String input) {
-        handComparator.compare(inputParser.parse(input))
-        outputFormatter.format("", "", "")
+        outputFormatter.format(handComparator.compare(inputParser.parse(input)))
         return "White wins. - with high card: Ace"
     }
 }

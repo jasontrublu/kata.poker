@@ -1,0 +1,4 @@
+enum Winner {
+    WHITE,
+    BLACK
+}

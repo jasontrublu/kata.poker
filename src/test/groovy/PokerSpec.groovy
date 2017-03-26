@@ -1,6 +1,9 @@
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static Winner.BLACK
+import static Winner.WHITE
+
 class PokerSpec extends Specification {
     InputParser parser = Mock InputParser
     HandComparator comparator = Mock HandComparator
@@ -11,6 +14,7 @@ class PokerSpec extends Specification {
     @Unroll
     def "test that game with input '#input' returns '#output'"() {
         parser.parse(_) >> [new Hand(), new Hand()]
+        comparator.compare(*_) >> [BLACK, "", ""]
         expect:
             poker.game(input) == output
         where:
@@ -19,6 +23,7 @@ class PokerSpec extends Specification {
     }
 
     def "game send input into InputParser"() {
+        comparator.compare(*_) >> [BLACK, "", ""]
         when:
             poker.game("input")
         then:
@@ -33,15 +38,21 @@ class PokerSpec extends Specification {
         when:
             poker.game("")
         then:
-            1 * comparator.compare(handOne, handTwo)
+            1 * comparator.compare(handOne, handTwo) >> [WHITE, "", ""]
     }
 
-    def "game interacts with outputFormatter"() {
+    @Unroll
+    def "game calls outputFormatter with values from HandComparator (#winner)"() {
         given:
             parser.parse(_) >> [new Hand(), new Hand()]
+            comparator.compare(*_) >> [winner, winningRule, winningValue]
         when:
             poker.game("input")
         then:
-            1 * outputFormatter.format("", "", "")
+            1 * outputFormatter.format(winner, winningRule, winningValue)
+        where:
+            winner << [BLACK, WHITE]
+            winningRule << ["high card", "flash"]
+            winningValue << ["Ace", ""]
     }
 }
