@@ -19,11 +19,13 @@ class PokerSpec extends Specification {
     def "test that game with input '#input' returns '#output'"() {
         parser.parse(_) >> [new Hand(), new Hand()]
         comparator.compare(*_) >> [BLACK, ""]
+        outputFormatter.format(*_) >> output
         expect:
             poker.game(input) == output
         where:
             input                                          | output
             "Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH" | "White wins. - with high card: Ace"
+            "Black: 2H 4S 4C 2D 4H  White: 2S 8S AS QS 3S" | "White wins. - with flash"
     }
 
     def "game send input into service.InputParser"() {
