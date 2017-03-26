@@ -6,10 +6,10 @@ import spock.lang.Unroll
 import static model.Winner.*
 
 class OutputFormatterSpec extends Specification {
+    OutputFormatter formatter = new OutputFormatterImpl()
 
     @Unroll
     def "basic output for #winner and #winningReason"() {
-        OutputFormatter formatter = new OutputFormatterImpl()
         expect:
             formatter.format(winner, winningReason) == result
         where:
