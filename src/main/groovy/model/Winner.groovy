@@ -3,10 +3,10 @@ package model
 enum Winner {
     WHITE(
         name: "White",
-        template: "%s wins. - with %s"),
+        template: "%s%s"),
     BLACK(
         name: "Black",
-        template: "%s wins. - with %s"),
+        template: "%s%s"),
     TIE(
         name: "Tie",
         template: "%s")
