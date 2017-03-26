@@ -5,6 +5,9 @@ import model.Winner
 class OutputFormatterImpl implements OutputFormatter {
     @Override
     String format(Winner winner, def String winningReason) {
-        return (winner == Winner.BLACK ? "Black" : "White") + " wins. - with flash"
+        if (winner == winner.TIE) {
+            return "Tie"
+        }
+        return (winner == Winner.BLACK ? "Black" : "White") + " wins. - with ${winningReason}"
     }
 }
