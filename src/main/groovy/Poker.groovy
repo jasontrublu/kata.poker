@@ -1,3 +1,7 @@
+import service.HandComparator
+import service.InputParser
+import service.OutputFormatter
+
 class Poker {
     InputParser inputParser
     HandComparator handComparator
