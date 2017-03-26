@@ -4,5 +4,5 @@ import model.Winner
 
 interface OutputFormatter {
 
-    def format(Winner winner, def winningReason)
+    String format(Winner winner, def String winningReason)
 }
