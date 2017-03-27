@@ -4,6 +4,7 @@ import service.InputParser
 import service.OutputFormatter
 import service.OutputFormatterImpl
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static model.Winner.BLACK
 import static model.Winner.TIE
@@ -17,7 +18,8 @@ class PokerOutputSpec extends Specification {
 
     def poker = new Poker(inputParser: parser, handComparator: comparator, outputFormatter: outputFormatter)
 
-    def "use formatter impl in Poker"() {
+    @Unroll
+    def "use formatter impl in Poker with #winner and #winningReason"() {
         given:
             parser.parse(_) >> [new Hand(), new Hand()]
             comparator.compare(*_) >> [winner, winningReason]
