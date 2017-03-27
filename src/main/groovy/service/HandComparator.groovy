@@ -4,5 +4,5 @@ import model.Hand
 
 interface HandComparator {
 
-    def compare(Hand handOne, Hand handTwo)
+    Tuple compare(Hand handOne, Hand handTwo)
 }
