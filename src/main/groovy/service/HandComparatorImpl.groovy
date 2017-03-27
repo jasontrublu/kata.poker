@@ -11,6 +11,6 @@ class HandComparatorImpl implements HandComparator {
         if (rules.empty) {
             return new Tuple(Winner.TIE, "")
         }
-        return [Winner.BLACK, "high card: ace"]
+        return rules[0].compare(handOne, handTwo)
     }
 }
