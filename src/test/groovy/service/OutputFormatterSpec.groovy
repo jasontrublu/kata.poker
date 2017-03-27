@@ -3,7 +3,9 @@ package service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static model.Winner.*
+import static model.Winner.BLACK
+import static model.Winner.TIE
+import static model.Winner.WHITE
 
 class OutputFormatterSpec extends Specification {
     OutputFormatter formatter = new OutputFormatterImpl()
