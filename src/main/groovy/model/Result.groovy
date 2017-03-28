@@ -1,34 +1,19 @@
 package model
 
-class Result {
-    final Winner winner
-    final String reason
+import groovy.transform.Immutable
 
-    Result(Winner winner, String reason) {
-        this.winner = winner
-        this.reason = reason
-    }
+@Immutable
+class Result {
+    public static final TIE = new Result(Winner.TIE, "")
+
+    Winner winner
+    String reason
 
     String getOutput(String template) {
         winner.getOutput(sprintf(template, reason))
     }
 
-    boolean equals(o) {
-        if (this.is(o)) return true
-        if (getClass() != o.class) return false
-
-        Result result = (Result) o
-
-        if (reason != result.reason) return false
-        if (winner != result.winner) return false
-
-        return true
-    }
-
-    int hashCode() {
-        int result
-        result = (winner != null ? winner.hashCode() : 0)
-        result = 31 * result + (reason != null ? reason.hashCode() : 0)
-        return result
+    def isTie() {
+        winner == Winner.TIE
     }
 }

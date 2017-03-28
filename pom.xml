@@ -13,7 +13,7 @@
         <groovy-eclipse-compiler.version>2.9.2-01</groovy-eclipse-compiler.version>
         <groovy-eclipse-batch.version>2.4.3-01</groovy-eclipse-batch.version>
         <spock.version>1.0-groovy-2.4</spock.version>
-        <lombok.version>1.16.6</lombok.version>
+        <lombok.version>1.16.14</lombok.version>
     </properties>
 
     <dependencies>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
@@ -62,7 +62,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
-                    <verbose>false</verbose>
+                    <verbose>true</verbose>
                     <compilerArguments>
                         <javaAgentClass>lombok.launch.Agent</javaAgentClass>
                     </compilerArguments>
