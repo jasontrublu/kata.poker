@@ -5,6 +5,6 @@ import model.Result
 class OutputFormatterImpl implements OutputFormatter {
     @Override
     String format(Result result) {
-        result.winner.getOutput(" wins. - with " + result.reason)
+        result.getOutput(" wins. - with %s")
     }
 }

@@ -9,6 +9,10 @@ class Result {
         this.reason = reason
     }
 
+    String getOutput(String template) {
+        winner.getOutput(sprintf(template, reason))
+    }
+
     boolean equals(o) {
         if (this.is(o)) return true
         if (getClass() != o.class) return false
