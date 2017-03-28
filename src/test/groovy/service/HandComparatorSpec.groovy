@@ -5,6 +5,10 @@ import model.Winner
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static model.Winner.BLACK
+import static model.Winner.TIE
+import static model.Winner.WHITE
+
 class HandComparatorSpec extends Specification {
     def "empty comparator"() {
         given:
@@ -12,7 +16,7 @@ class HandComparatorSpec extends Specification {
         when:
             def (Winner winner, String reason) = comp.compare(new Hand(), new Hand())
         then:
-            winner == Winner.TIE
+            winner == TIE
     }
 
     @Unroll
@@ -24,10 +28,27 @@ class HandComparatorSpec extends Specification {
         expect:
             comp.compare(new Hand(), new Hand()) == [winner, reason]
         where:
-            winner       | reason
-            Winner.BLACK | "high card: ace"
-            Winner.BLACK | "high card: two"
-            Winner.WHITE | "high card: ace"
-            Winner.WHITE | "high card: king"
+            winner | reason
+            BLACK  | "high card: ace"
+            BLACK  | "high card: two"
+            WHITE  | "high card: ace"
+            WHITE  | "high card: king"
+    }
+
+    @Unroll
+    def "use two comparators, first is #first, second is #second result: #winner"() {
+        given:
+            HandComparator rule1 = Mock HandComparator
+            HandComparator rule2 = Mock HandComparator
+            HandComparator comp = new HandComparatorImpl(rules: [rule1, rule2])
+            rule1.compare(*_) >> [first, reason]
+            rule2.compare(*_) >> [second, reason]
+        expect:
+            comp.compare(new Hand(), new Hand()) == [winner, winReason]
+        where:
+            first | reason           | second | winner | winReason
+            BLACK | "high card: ace" | WHITE  | BLACK  | "high card: ace"
+            TIE   | "high card: ace" | WHITE  | WHITE  | "high card: ace"
+            TIE   | "high card: ace" | TIE    | TIE    | ""
     }
 }

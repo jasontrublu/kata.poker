@@ -7,10 +7,14 @@ class HandComparatorImpl implements HandComparator {
     Collection<HandComparator> rules = []
 
     @Override
-    Tuple compare(Hand handOne, Hand handTwo) {
+    Tuple2 compare(Hand handOne, Hand handTwo) {
         if (rules.empty) {
-            return new Tuple(Winner.TIE, "")
+            return new Tuple2(Winner.TIE, "")
         }
-        return rules[0].compare(handOne, handTwo)
+        return rules.stream()
+            .map({ it.compare(handOne, handTwo) })
+            .filter({ it.getFirst() != Winner.TIE })
+            .findFirst()
+            .orElse(new Tuple2(Winner.TIE, ""))
     }
 }
