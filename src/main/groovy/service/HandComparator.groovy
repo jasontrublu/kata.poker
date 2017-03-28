@@ -5,5 +5,5 @@ import model.Result
 
 interface HandComparator {
 
-    Result compare(Hand handOne, Hand handTwo)
+    Result compare(Hand handWhite, Hand handBlack)
 }

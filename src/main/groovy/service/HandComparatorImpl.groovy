@@ -7,9 +7,9 @@ class HandComparatorImpl implements HandComparator {
     Collection<HandComparator> rules = []
 
     @Override
-    Result compare(Hand handOne, Hand handTwo) {
+    Result compare(Hand handWhite, Hand handBlack) {
         return rules.stream()
-            .map({ it.compare(handOne, handTwo) })
+            .map({ it.compare(handWhite, handBlack) })
             .filter({ !it.isTie() })
             .findFirst()
             .orElse(Result.TIE)

@@ -8,9 +8,12 @@ import service.HandComparator
 
 class HighCardRule implements HandComparator {
     @Override
-    Result compare(Hand handOne, Hand handTwo) {
-        if (handOne.cards.contains(Card.Ace)) {
+    Result compare(Hand handWhite, Hand handBlack) {
+        if (handWhite.cards.contains(Card.Ace)) {
             return new Result(Winner.WHITE, "")
+        }
+        if (handBlack.cards.contains(Card.Ace)) {
+            return new Result(Winner.BLACK, "")
         }
         return Result.TIE
     }

@@ -17,6 +17,12 @@ class HighCardRuleSpec extends Specification {
             def result = new HighCardRule().compare(new Hand(Card.Ace), new Hand(Card.Two))
         then:
             result == new Result(Winner.WHITE, "")
+    }
 
+    def "ace from black hand is higher than white hand with a two"() {
+        when:
+            def result = new HighCardRule().compare(new Hand(Card.Two), new Hand(Card.Ace))
+        then:
+            result == new Result(Winner.BLACK, "")
     }
 }
