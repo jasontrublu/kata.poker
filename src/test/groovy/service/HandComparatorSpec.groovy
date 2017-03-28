@@ -41,7 +41,7 @@ class HandComparatorSpec extends Specification {
             HandComparator rule1 = Mock HandComparator
             HandComparator rule2 = Mock HandComparator
             HandComparator comp = new HandComparatorImpl(rules: [rule1, rule2])
-            rule1.compare(*_) >> [first, reason]
+            1 * rule1.compare(*_) >> [first, reason]
             rule2.compare(*_) >> [second, reason]
         expect:
             comp.compare(new Hand(), new Hand()) == new Result(winner, winReason)
