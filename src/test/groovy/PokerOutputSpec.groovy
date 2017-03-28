@@ -1,4 +1,5 @@
 import model.Hand
+import model.Result
 import service.HandComparator
 import service.InputParser
 import service.OutputFormatter
@@ -22,7 +23,7 @@ class PokerOutputSpec extends Specification {
     def "use formatter impl in Poker with #winner and #winningReason"() {
         given:
             parser.parse(_) >> [new Hand(), new Hand()]
-            comparator.compare(*_) >> [winner, winningReason]
+            comparator.compare(*_) >> new Result(winner, winningReason)
         expect:
             poker.game("input") == result
         where:

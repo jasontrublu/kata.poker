@@ -1,5 +1,6 @@
 package service
 
+import model.Result
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -13,7 +14,7 @@ class OutputFormatterSpec extends Specification {
     @Unroll
     def "basic output for #winner and #winningReason"() {
         expect:
-            formatter.format(winner, winningReason) == result
+            formatter.format(new Result(winner, winningReason)) == result
         where:
             winner | winningReason    | result
             BLACK  | "flash"          | "Black wins. - with flash"

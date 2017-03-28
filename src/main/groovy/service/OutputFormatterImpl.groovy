@@ -1,10 +1,10 @@
 package service
 
-import model.Winner
+import model.Result
 
 class OutputFormatterImpl implements OutputFormatter {
     @Override
-    String format(Winner winner, def String winningReason) {
-        winner.getOutput(" wins. - with " + winningReason)
+    String format(Result result) {
+        result.winner.getOutput(" wins. - with " + result.reason)
     }
 }

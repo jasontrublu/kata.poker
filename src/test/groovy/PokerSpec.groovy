@@ -1,4 +1,5 @@
 import model.Hand
+import model.Result
 import service.HandComparator
 import service.InputParser
 import service.OutputFormatter
@@ -18,7 +19,7 @@ class PokerSpec extends Specification {
     @Unroll
     def "test that game with input '#input' returns '#output'"() {
         parser.parse(_) >> [new Hand(), new Hand()]
-        comparator.compare(*_) >> [BLACK, ""]
+        comparator.compare(*_) >> new Result(BLACK, "")
         outputFormatter.format(*_) >> output
         expect:
             poker.game(input) == output
@@ -29,7 +30,7 @@ class PokerSpec extends Specification {
     }
 
     def "game send input into service.InputParser"() {
-        comparator.compare(*_) >> [BLACK, ""]
+        comparator.compare(*_) >> new Result(BLACK, "")
         when:
             poker.game("input")
         then:
@@ -44,7 +45,7 @@ class PokerSpec extends Specification {
         when:
             poker.game("")
         then:
-            1 * comparator.compare(handOne, handTwo) >> [WHITE, ""]
+            1 * comparator.compare(handOne, handTwo) >> new Result(WHITE, "")
     }
 
     @Unroll
@@ -55,7 +56,7 @@ class PokerSpec extends Specification {
         when:
             poker.game("input")
         then:
-            1 * outputFormatter.format(winner, winningReason)
+            1 * outputFormatter.format(new Result(winner, winningReason))
         where:
             winner << [BLACK, WHITE]
             winningReason << ["high card", "flash"]

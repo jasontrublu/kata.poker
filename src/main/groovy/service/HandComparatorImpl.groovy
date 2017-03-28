@@ -1,20 +1,21 @@
 package service
 
 import model.Hand
+import model.Result
 import model.Winner
 
 class HandComparatorImpl implements HandComparator {
     Collection<HandComparator> rules = []
 
     @Override
-    Tuple2 compare(Hand handOne, Hand handTwo) {
+    Result compare(Hand handOne, Hand handTwo) {
         if (rules.empty) {
-            return new Tuple2(Winner.TIE, "")
+            return new Result(Winner.TIE, "")
         }
         return rules.stream()
             .map({ it.compare(handOne, handTwo) })
-            .filter({ it.getFirst() != Winner.TIE })
+            .filter({ it.winner != Winner.TIE })
             .findFirst()
-            .orElse(new Tuple2(Winner.TIE, ""))
+            .orElse(new Result(Winner.TIE, ""))
     }
 }

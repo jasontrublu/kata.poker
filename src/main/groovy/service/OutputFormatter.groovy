@@ -1,8 +1,8 @@
 package service
 
-import model.Winner
+import model.Result
 
 interface OutputFormatter {
 
-    String format(Winner winner, def String winningReason)
+    String format(Result result)
 }

@@ -1,8 +1,9 @@
 package service
 
 import model.Hand
+import model.Result
 
 interface HandComparator {
 
-    Tuple2 compare(Hand handOne, Hand handTwo)
+    Result compare(Hand handOne, Hand handTwo)
 }
