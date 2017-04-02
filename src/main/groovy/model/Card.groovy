@@ -15,6 +15,11 @@ class Card implements Comparable<Card> {
     int compareTo(Card o) {
         return suit.compareTo(o.suit)
     }
+
+    @Override
+    String toString() {
+        return suit.name()
+    }
 }
 
 enum Suit {

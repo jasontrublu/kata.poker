@@ -1,9 +1,18 @@
 package model
 
-class Hand {
-    def cards = []
+import java.util.stream.Collectors
 
-    public Hand(Card... cards) {
+class Hand {
+    List<Card> cards = []
+
+    Hand(Card... cards) {
         this.cards = cards
+    }
+
+    @Override
+    String toString() {
+        return cards.stream()
+            .map({ x -> x.toString() })
+            .collect(Collectors.joining(", ", "[", "]"))
     }
 }
