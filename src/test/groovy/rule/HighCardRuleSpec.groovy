@@ -10,10 +10,6 @@ import static model.Card.THREE
 import static model.Card.TWO
 
 class HighCardRuleSpec extends Specification {
-    def "two empty hand result in tie"() {
-        expect:
-            new HighCardRule().compare(new Hand(), new Hand()) == Result.TIE
-    }
 
     def "One ace is higher than a two"() {
         when:

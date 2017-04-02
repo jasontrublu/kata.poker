@@ -1,8 +1,24 @@
 package model
 
-class Card {
-    final static Card ACE = new Card()
-    final static Card TWO = new Card()
-    final static Card THREE = new Card()
+class Card implements Comparable<Card> {
+    final static Card ACE = new Card(Suit.ACE)
+    final static Card TWO = new Card(Suit.TWO)
+    final static Card THREE = new Card(Suit.THREE)
 
+    private final Suit suit
+
+    Card(Suit suit) {
+        this.suit = suit
+    }
+
+    @Override
+    int compareTo(Card o) {
+        return suit.compareTo(o.suit)
+    }
+}
+
+enum Suit {
+    TWO,
+    THREE,
+    ACE
 }

@@ -8,15 +8,14 @@ import service.HandComparator
 
 class HighCardRule implements HandComparator {
     @Override
-    Result compare(Hand handWhite, Hand handBlack) {
-        if (handWhite.cards.contains(Card.ACE)) {
-            if (!handBlack.cards.contains(Card.ACE)) {
-                return new Result(Winner.WHITE, "")
-            }
-        } else if (handBlack.cards.contains(Card.ACE)) {
+    Result compare(final Hand handWhite, final Hand handBlack) {
+        Card cardWhite = handWhite.cards.first()
+        Card cardBlack = handBlack.cards.first()
+        def comp = cardWhite.compareTo(cardBlack)
+        if (comp < 0) {
             return new Result(Winner.BLACK, "")
         }
-        if (handWhite.cards.contains(Card.THREE)) {
+        if (comp > 0) {
             return new Result(Winner.WHITE, "")
         }
         return Result.TIE
