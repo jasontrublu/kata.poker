@@ -1,5 +1,6 @@
 package service
 
+import model.Card
 import model.Hand
 import model.Result
 import spock.lang.Specification
@@ -10,6 +11,8 @@ import static model.Winner.TIE
 import static model.Winner.WHITE
 
 class HandComparatorSpec extends Specification {
+    def anyHand = new Hand(Card.ACE)
+
     def "empty comparator"() {
         given:
             HandComparator comp = new HandComparatorImpl()
@@ -26,7 +29,7 @@ class HandComparatorSpec extends Specification {
             HandComparator comp = new HandComparatorImpl(rules: [rule])
             1 * rule.compare(*_) >> [winner, reason]
         expect:
-            comp.compare(new Hand(), new Hand()) == new Result(winner, reason)
+            comp.compare(anyHand, anyHand) == new Result(winner, reason)
         where:
             winner | reason
             BLACK  | "high card: ace"
@@ -44,7 +47,7 @@ class HandComparatorSpec extends Specification {
             1 * rule1.compare(*_) >> [first, reason]
             rule2.compare(*_) >> [second, reason]
         expect:
-            comp.compare(new Hand(), new Hand()) == new Result(winner, winReason)
+            comp.compare(anyHand, anyHand) == new Result(winner, winReason)
         where:
             first | reason           | second | winner | winReason
             BLACK | "high card: ace" | WHITE  | BLACK  | "high card: ace"

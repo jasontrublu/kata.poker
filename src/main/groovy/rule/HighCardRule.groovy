@@ -11,12 +11,12 @@ class HighCardRule implements HandComparator {
     Result compare(final Hand handWhite, final Hand handBlack) {
         Card cardWhite = handWhite.cards.first()
         Card cardBlack = handBlack.cards.first()
-        def comp = cardWhite.compareTo(cardBlack)
+        def comp = cardWhite <=> cardBlack
         if (comp < 0) {
-            return new Result(Winner.BLACK, "")
+            return new Result(Winner.BLACK, cardBlack.toString())
         }
         if (comp > 0) {
-            return new Result(Winner.WHITE, "")
+            return new Result(Winner.WHITE, cardWhite.toString())
         }
         return Result.TIE
     }

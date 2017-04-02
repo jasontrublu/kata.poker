@@ -1,29 +1,37 @@
 package model
 
 class Card implements Comparable<Card> {
-    final static Card ACE = new Card(Suit.ACE)
-    final static Card TWO = new Card(Suit.TWO)
-    final static Card THREE = new Card(Suit.THREE)
+    final static Card TWO = new Card(Value.TWO)
+    final static Card THREE = new Card(Value.THREE)
+    final static Card FOUR = new Card(Value.FOUR)
+    final static Card FIVE = new Card(Value.FIVE)
+    final static Card SIX = new Card(Value.SIX)
+    final static Card SEVEN = new Card(Value.SEVEN)
+    final static Card EIGHT = new Card(Value.EIGHT)
+    final static Card NINE = new Card(Value.NINE)
+    final static Card JACK = new Card(Value.JACK)
+    final static Card QUEEN = new Card(Value.QUEEN)
+    final static Card TEN = new Card(Value.TEN)
+    final static Card KING = new Card(Value.KING)
+    final static Card ACE = new Card(Value.ACE)
 
-    private final Suit suit
+    private final Value value
 
-    Card(Suit suit) {
-        this.suit = suit
+    Card(Value value) {
+        this.value = value
     }
 
     @Override
     int compareTo(Card o) {
-        return suit.compareTo(o.suit)
+        return value <=> o.value
     }
 
     @Override
     String toString() {
-        return suit.name()
+        return value.name()
     }
 }
 
-enum Suit {
-    TWO,
-    THREE,
-    ACE
+enum Value {
+    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 }

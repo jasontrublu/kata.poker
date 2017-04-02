@@ -12,7 +12,7 @@ class Hand {
     @Override
     String toString() {
         return cards.stream()
-            .map({ x -> x.toString() })
+            .map({ it.toString() })
             .collect(Collectors.joining(", ", "[", "]"))
     }
 }
