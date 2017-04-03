@@ -67,4 +67,25 @@ class HighCardRuleSpec extends Specification {
         where:
             card << Value.values()
     }
+
+    def "two cards each, highest are equal, black wins"() {
+        def handWhite = new Hand(ACE, TWO)
+        def handBlack = new Hand(ACE, FOUR)
+        expect:
+            new HighCardRule().compare(handWhite, handBlack) == new Result(BLACK, "FOUR")
+    }
+
+    def "two cards each, highest are equal, white wins"() {
+        def handWhite = new Hand(ACE, FOUR)
+        def handBlack = new Hand(ACE, TWO)
+        expect:
+            new HighCardRule().compare(handWhite, handBlack) == new Result(WHITE, "FOUR")
+    }
+
+    def "two cards each, still tie"() {
+        def handWhite = new Hand(ACE, FOUR)
+        def handBlack = new Hand(ACE, FOUR)
+        expect:
+            new HighCardRule().compare(handWhite, handBlack) == Result.TIE
+    }
 }
