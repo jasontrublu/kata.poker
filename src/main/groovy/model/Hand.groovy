@@ -3,10 +3,14 @@ package model
 import java.util.stream.Collectors
 
 class Hand {
-    List<Card> cards = []
+    final List<Card> cards = []
 
     Hand(Card... cards) {
-        this.cards = cards
+        this.cards = cards.clone()
+    }
+
+    Hand(List<Card> cards) {
+        this.cards = cards.clone()
     }
 
     Card first() {

@@ -68,24 +68,39 @@ class HighCardRuleSpec extends Specification {
             card << Value.values()
     }
 
-    def "two cards each, highest are equal, black wins"() {
-        def handWhite = new Hand(ACE, TWO)
-        def handBlack = new Hand(ACE, FOUR)
+    @Unroll
+    def "two cards each, highest are equal, #name"() {
+        def handWhite = new Hand(ACE, whiteLast)
+        def handBlack = new Hand(ACE, blackLast)
         expect:
-            new HighCardRule().compare(handWhite, handBlack) == new Result(BLACK, "FOUR")
+            new HighCardRule().compare(handWhite, handBlack) == new Result(winner, "FOUR")
+        where:
+            name         | winner | whiteLast | blackLast
+            "black wins" | BLACK  | TWO       | FOUR
+            "white wins" | WHITE  | FOUR      | TWO
     }
 
-    def "two cards each, highest are equal, white wins"() {
-        def handWhite = new Hand(ACE, FOUR)
-        def handBlack = new Hand(ACE, TWO)
-        expect:
-            new HighCardRule().compare(handWhite, handBlack) == new Result(WHITE, "FOUR")
-    }
-
-    def "two cards each, still tie"() {
-        def handWhite = new Hand(ACE, FOUR)
-        def handBlack = new Hand(ACE, FOUR)
+    @Unroll
+    def "#count cards each, still tie"() {
+        def handWhite = new Hand(cards)
+        def handBlack = new Hand(cards)
         expect:
             new HighCardRule().compare(handWhite, handBlack) == Result.TIE
+        where:
+            count   | cards
+            "two"   | [ACE, FOUR]
+            "three" | [ACE, FOUR, TWO]
+    }
+
+    @Unroll
+    def "three cards each, highest are equal, #name"() {
+        def handWhite = new Hand(ACE, KING, whiteLast)
+        def handBlack = new Hand(ACE, KING, blackLast)
+        expect:
+            new HighCardRule().compare(handWhite, handBlack) == new Result(winner, "FOUR")
+        where:
+            name         | winner | whiteLast | blackLast
+            "white wins" | WHITE  | FOUR      | TWO
+            "black wins" | BLACK  | THREE     | FOUR
     }
 }

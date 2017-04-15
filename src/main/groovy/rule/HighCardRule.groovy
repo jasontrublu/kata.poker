@@ -17,6 +17,9 @@ class HighCardRule implements HandComparator {
         if (handWhite.cards.size() > 1 && handBlack.cards.size() > 1) {
             out = getWinner(handWhite.get(1), handBlack.get(1))
         }
+        if (handWhite.cards.size() > 2 && handBlack.cards.size() > 2) {
+            out = getWinner(handWhite.get(2), handBlack.get(2))
+        }
         return out
     }
 
