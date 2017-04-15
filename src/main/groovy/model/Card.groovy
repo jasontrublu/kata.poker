@@ -1,6 +1,7 @@
 package model
 
 class Card implements Comparable<Card> {
+    final static Card NIL = new Card(Value.NIL)
     final static Card TWO = new Card(Value.TWO)
     final static Card THREE = new Card(Value.THREE)
     final static Card FOUR = new Card(Value.FOUR)
@@ -33,5 +34,5 @@ class Card implements Comparable<Card> {
 }
 
 enum Value {
-    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+    NIL, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 }
