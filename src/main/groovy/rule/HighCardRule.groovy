@@ -6,20 +6,17 @@ import model.Result
 import model.Winner
 import service.HandComparator
 
+import static model.Result.TIE
+
 class HighCardRule implements HandComparator {
 
     @Override
     Result compare(final Hand handWhite, final Hand handBlack) {
-        Result out = getWinner(handWhite.get(0), handBlack.get(0))
-        if (out != Result.TIE) {
-            return out
-        }
-        out = getWinner(handWhite.get(1), handBlack.get(1))
-        if (out != Result.TIE) {
-            return out
-        }
-        out = getWinner(handWhite.get(2), handBlack.get(2))
-        return out
+        return (0..2).stream()
+            .map({ index -> getWinner(handWhite.get(index), handBlack.get(index)) })
+            .filter({ it != TIE })
+            .findFirst()
+            .orElse(TIE)
     }
 
     private static Result getWinner(Card cardWhite, Card cardBlack) {
@@ -30,6 +27,6 @@ class HighCardRule implements HandComparator {
         if (comp > 0) {
             return new Result(Winner.WHITE, cardWhite.toString())
         }
-        Result.TIE
+        TIE
     }
 }

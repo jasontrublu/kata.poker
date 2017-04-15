@@ -90,6 +90,8 @@ class HighCardRuleSpec extends Specification {
             count   | cards
             "two"   | [ACE, FOUR]
             "three" | [ACE, FOUR, TWO]
+            "four"  | [ACE, FOUR, THREE, TWO]
+            "five"  | [ACE, FIVE, FOUR, THREE, TWO]
     }
 
     @Unroll
