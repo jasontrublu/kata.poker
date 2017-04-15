@@ -12,7 +12,7 @@ class HighCardRule implements HandComparator {
 
     @Override
     Result compare(final Hand handWhite, final Hand handBlack) {
-        return (0..2).stream()
+        return (0..4).stream()
             .map({ index -> getWinner(handWhite.get(index), handBlack.get(index)) })
             .filter({ it != TIE })
             .findFirst()

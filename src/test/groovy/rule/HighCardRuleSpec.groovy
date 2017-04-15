@@ -69,15 +69,21 @@ class HighCardRuleSpec extends Specification {
     }
 
     @Unroll
-    def "two cards each, highest are equal, #name"() {
-        def handWhite = new Hand(ACE, whiteLast)
-        def handBlack = new Hand(ACE, blackLast)
+    def "#name1 cards each, highest are equal, #name2"() {
+        def handWhite = new Hand(otherCards.clone() << whiteLast)
+        def handBlack = new Hand(otherCards.clone() << blackLast)
         expect:
             new HighCardRule().compare(handWhite, handBlack) == new Result(winner, "FOUR")
         where:
-            name         | winner | whiteLast | blackLast
-            "black wins" | BLACK  | TWO       | FOUR
-            "white wins" | WHITE  | FOUR      | TWO
+            name1   | name2        | winner | whiteLast | blackLast | otherCards
+            "two"   | "black wins" | BLACK  | TWO       | FOUR      | [ACE]
+            "two"   | "white wins" | WHITE  | FOUR      | TWO       | [ACE]
+            "three" | "black wins" | BLACK  | TWO       | FOUR      | [ACE, KING]
+            "three" | "white wins" | WHITE  | FOUR      | TWO       | [ACE, KING]
+            "four"  | "black wins" | BLACK  | TWO       | FOUR      | [ACE, KING, JACK]
+            "four"  | "white wins" | WHITE  | FOUR      | TWO       | [ACE, KING, JACK]
+            "five"  | "black wins" | BLACK  | TWO       | FOUR      | [ACE, KING, JACK, QUEEN]
+            "five"  | "white wins" | WHITE  | FOUR      | TWO       | [ACE, KING, JACK, QUEEN]
     }
 
     @Unroll
@@ -92,17 +98,5 @@ class HighCardRuleSpec extends Specification {
             "three" | [ACE, FOUR, TWO]
             "four"  | [ACE, FOUR, THREE, TWO]
             "five"  | [ACE, FIVE, FOUR, THREE, TWO]
-    }
-
-    @Unroll
-    def "three cards each, highest are equal, #name"() {
-        def handWhite = new Hand(ACE, KING, whiteLast)
-        def handBlack = new Hand(ACE, KING, blackLast)
-        expect:
-            new HighCardRule().compare(handWhite, handBlack) == new Result(winner, "FOUR")
-        where:
-            name         | winner | whiteLast | blackLast
-            "white wins" | WHITE  | FOUR      | TWO
-            "black wins" | BLACK  | THREE     | FOUR
     }
 }
