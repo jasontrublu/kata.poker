@@ -15,7 +15,7 @@ class Hand {
     }
 
     Hand(List<Card> cards) {
-        List inputClone = cards.clone()
+        List inputClone = cards.collect().sort().reverse()
         while (inputClone.size() != 5) {
             inputClone.add(NIL)
         }

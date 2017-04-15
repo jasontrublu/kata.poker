@@ -99,4 +99,12 @@ class HighCardRuleSpec extends Specification {
             "four"  | [ACE, FOUR, THREE, TWO]
             "five"  | [ACE, FIVE, FOUR, THREE, TWO]
     }
+
+    def "order does not matter"() {
+        def handWhite = new Hand([TWO, ACE])
+        def handBlack = new Hand([ACE, TWO])
+
+        expect:
+            new HighCardRule().compare(handWhite, handBlack) == Result.TIE
+    }
 }

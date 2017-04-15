@@ -20,13 +20,12 @@ class HighCardRule implements HandComparator {
     }
 
     private static Result getWinner(Card cardWhite, Card cardBlack) {
-        def comp = cardWhite <=> cardBlack
-        if (comp < 0) {
+        if ((cardWhite <=> cardBlack) < 0) {
             return new Result(Winner.BLACK, cardBlack.toString())
         }
-        if (comp > 0) {
+        if ((cardWhite <=> cardBlack) > 0) {
             return new Result(Winner.WHITE, cardWhite.toString())
         }
-        TIE
+        return TIE
     }
 }
