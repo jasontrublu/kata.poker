@@ -7,19 +7,15 @@ import model.Winner
 import service.HandComparator
 
 class HighCardRule implements HandComparator {
-    
+
     @Override
     Result compare(final Hand handWhite, final Hand handBlack) {
-        def cardWhite = handWhite.cards.first()
-        def cardBlack = handBlack.cards.first()
-        Result out = getWinner(cardWhite, cardBlack)
+        Result out = getWinner(handWhite.cards.first(), handBlack.cards.first())
         if (out != Result.TIE) {
             return out
         }
         if (handWhite.cards.size() > 1 && handBlack.cards.size() > 1) {
-            cardWhite = handWhite.cards.get(1)
-            cardBlack = handBlack.cards.get(1)
-            out = getWinner(cardWhite, cardBlack)
+            out = getWinner(handWhite.cards.get(1), handBlack.cards.get(1))
         }
         return out
     }
