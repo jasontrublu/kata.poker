@@ -9,6 +9,14 @@ class Hand {
         this.cards = cards
     }
 
+    Card first() {
+        cards.first()
+    }
+
+    Card get(int index) {
+        cards.get(index)
+    }
+
     @Override
     String toString() {
         return cards.stream()

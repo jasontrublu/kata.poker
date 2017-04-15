@@ -10,12 +10,12 @@ class HighCardRule implements HandComparator {
 
     @Override
     Result compare(final Hand handWhite, final Hand handBlack) {
-        Result out = getWinner(handWhite.cards.first(), handBlack.cards.first())
+        Result out = getWinner(handWhite.first(), handBlack.first())
         if (out != Result.TIE) {
             return out
         }
         if (handWhite.cards.size() > 1 && handBlack.cards.size() > 1) {
-            out = getWinner(handWhite.cards.get(1), handBlack.cards.get(1))
+            out = getWinner(handWhite.get(1), handBlack.get(1))
         }
         return out
     }
